@@ -7,7 +7,7 @@ This project serves as a demonstration of image classification using machine lea
 ## Setup
 
 1. Spin up a docker container - tensorflow/serving
-2. Bind the [model](cat_dog_classify_model) to expose a port 8510 to POST request to predict by `docker run -p 8501:8501 --mount type=bind,source=model,target=/models/my_model/1/ -e MODEL_NAME=my_model -t tensorflow/serving`
+2. Bind the [model](model) to expose a port 8510 to POST request to predict by `docker run -p 8501:8501 --mount type=bind,source=model,target=/models/my_model/1/ -e MODEL_NAME=my_model -t tensorflow/serving`
 3. Create and activate a virtualenv and install the requirements `pip install -r requirements.txt`
 4. Run `python manage.py migrate` and `python manage.py runserver`
 5. Open `http://localhost:8000/` in your browser
