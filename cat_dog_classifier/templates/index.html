@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<style>
+    #header {
+        text-align: center;
+        background-color: lightgray;
+        padding: 20px;
+        font-size: 30px;
+    }
+
+    #uploader,p {
+        text-align: center;
+    }
+
+    #result {
+        text-align: center;
+        font-size: 24px;
+        background-color: lightgray;
+        padding: 20px;
+    }
+</style>
+
+<body>
+    <div id="header">CAT OR DOG?</div>
+    <div id="uploader">
+        <form id="imageForm" action="{% url 'predict_images' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input id="imageInput" type="file" name="image">
+            <button id="submitButton" type="submit">Submit</button>
+            <button id="retryButton" style="display: none;" onclick="location.reload();">Retry</button>
+        </form>
+    </div>
+    {% if not percentage and not predicted_class %}
+        <div id="result">No image is uploaded.</div>
+    {% else %}
+        <div id="result">{{ predicted_class }}: {{ percentage }}%</div>
+    {% endif %}
+    <div>
+        <p>Disclaimer: The classifier is based on the rate, the options will be only "dog" or "cat".</p>
+    </div>
+    <script>
+        document.getElementById('imageForm').addEventListener('submit', function() {
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
